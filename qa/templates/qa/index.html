@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Question AI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="mb-4">💬 Poser une question à l'IA</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+
+        <hr>
+
+        <h3>📝 Dernières Questions</h3>
+        {% for q in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <strong>Question :</strong> {{ q.question_text }}<br>
+                    <strong>Réponse :</strong> {{ q.answer_text|linebreaks }}
+                </div>
+            </div>
+        {% empty %}
+            <p>Aucune question posée pour l'instant.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

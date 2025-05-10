@@ -1,0 +1,30 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+
+# Environnements virtuels
+venv/
+env/
+ENV/
+
+# Fichiers secrets
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Render
+*.sqlite3
