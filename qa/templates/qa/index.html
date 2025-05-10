@@ -2,31 +2,49 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Question AI</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Question à l'IA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
     <div class="container py-5">
-        <h1 class="mb-4">💬 Poser une question à l'IA</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
-
-        <hr>
-
-        <h3>📝 Dernières Questions</h3>
-        {% for q in questions %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <strong>Question :</strong> {{ q.question_text }}<br>
-                    <strong>Réponse :</strong> {{ q.answer_text|linebreaks }}
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center mb-4">
+                    <h1 class="display-5">💬 Poser une question à l'IA</h1>
+                    <p class="lead">Soumettez votre question ci-dessous et recevez une réponse instantanée.</p>
                 </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h3 class="mb-3">📝 Dernières Questions</h3>
+
+                {% for q in questions %}
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <p><strong>Question :</strong> {{ q.question_text }}</p>
+                            <p><strong>Réponse :</strong><br>{{ q.answer_text|linebreaks }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="alert alert-info">Aucune question posée pour l'instant.</div>
+                {% endfor %}
             </div>
-        {% empty %}
-            <p>Aucune question posée pour l'instant.</p>
-        {% endfor %}
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
