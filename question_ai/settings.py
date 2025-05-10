@@ -4,6 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-question-ai-123456'
 DEBUG = True
+
 ALLOWED_HOSTS = ['question-ai-r7ys.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
@@ -54,4 +55,6 @@ DATABASES = {
 }
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
