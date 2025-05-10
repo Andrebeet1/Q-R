@@ -2,4 +2,3 @@ Django>=4.2
 requests
 gunicorn
 python-dotenv
-
