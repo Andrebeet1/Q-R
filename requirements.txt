@@ -2,3 +2,6 @@ Django>=4.2
 requests
 gunicorn
 python-dotenv
+dj-database-url
+psycopg2-binary
+
