@@ -1,9 +1,15 @@
 from pathlib import Path
+import os
+import dj_database_url
+from decouple import config
 
+# Récupérer le chemin de base
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-question-ai-123456'
-DEBUG = True
+# Charger SECRET_KEY depuis les variables d'environnement
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-defaultkey')
+
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['question-ai-r7ys.onrender.com', 'localhost', '127.0.0.1']
 
@@ -47,14 +53,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'question_ai.wsgi.application'
 
+# Configuration de la base de données
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default='postgresql://user:password@localhost/dbname'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
